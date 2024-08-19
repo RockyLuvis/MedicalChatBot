@@ -12,9 +12,9 @@ list_of_files = [
     "setup.py",
     "app.py",
     "store_index.py",
-    "static",
+    "static/.gitkeep",
     "templates/chat.html"
-
+    
 ]
 
 for filepath in list_of_files:
