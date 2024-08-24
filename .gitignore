@@ -10,6 +10,8 @@ __pycache__/
 .env
 __pycache__
 myenv
+experiment
+experiment\llma_medicalChatBot.ipynb
 
 # Distribution / packaging
 .Python
