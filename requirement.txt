@@ -1,0 +1,20 @@
+huggingface_hub
+
+numpy
+
+langchain-community
+ctransformers==0.2.5
+sentence-transformers==2.2.2
+
+pinecone-client[grpc]==3.0.0 
+pinecone-datasets==0.7.0 
+langchain-pinecone==0.0.3 
+langchain-openai==0.0.7 
+langchain==0.1.9
+
+flask
+pypdf
+
+python-dotenv
+
+-e .
