@@ -10,9 +10,8 @@ Example 3:
 Input: head = [1]
 Output: [1]
 '''
+import sys
 from collections import deque
-
-
 
 class node:
     stack = deque()
@@ -59,12 +58,15 @@ class node:
 
     def get_length(self, headnode):
         i = 0
+        if (headnode is None):
+            return 0
+        
         curr = headnode
         while (curr):
             i = i+1
             curr = curr.next #Traverse till end
         
-        print("num of nodes:", i)
+        #print("num of nodes:", i)
         return i
 
     def chunk_revesal(self, headnode, k):
@@ -73,47 +75,55 @@ class node:
         new_head = node(0)
         prev = new_head
         #new_head_flag = False
+        try:
 
-        #get length of list
-        if headnode is None or k<= 0:
+            if k <= 0:
+                raise ValueError ("Chunk size has to be greater than 0")
+
+            #get length of list
+            if headnode is None or headnode.next is None or k == 1 :
+                return headnode
+            else:
+                #Get length of the list
+                list_len = self.get_length(headnode)
+
+            # determining chunks, if list len is multiple of k then reverse till end
+            # if listlen is not multiple then leave last less than k number of node unreversed
+            #if list_len % k == 0:
+            num_chunks = list_len // k
+
+            #Traverse till the first Kth chunk node
+            for _ in range(num_chunks):
+
+                if (curr):
+
+                    for _ in range(k):
+                        #Push curr.next to LIFO
+                        self.stack.append(curr)
+                        curr = curr.next
+
+                    #   Now curr.next is pointing to the next chunk
+                    # Make curr.next point to first.next
+                    # This is for 3 node reversal case
+                    while (self.stack):
+                        prev.next = self.stack.pop()
+                        #if new_head_flag == 0:  # First chunk reversal
+                        #    new_head = prev.next
+                        #    new_head_flag = True
+                        prev = prev.next
+
+                prev.next = curr
+
+
+            remaining_nodes = list_len - (k* num_chunks)
+            if ( remaining_nodes > 0):
+                #attach remaining nodes
+                prev.next = curr
+        
+        except Exception as e:
+            print (e)
             return headnode
-        else:
-            #Get length of the list
-            list_len = self.get_length(headnode)
 
-        # determining chunks, if list len is multiple of k then reverse till end
-        # if listlen is not multiple then leave last less than k number of node unreversed
-        #if list_len % k == 0:
-        num_chunks = list_len // k
-
-        #Traverse till the first Kth chunk node
-        for _ in range(num_chunks):
-
-            if (curr):
-
-                for _ in range(k):
-                    #Push curr.next to LIFO
-                    self.stack.append(curr)
-                    curr = curr.next
-
-                #   Now curr.next is pointing to the next chunk
-                # Make curr.next point to first.next
-                # This is for 3 node reversal case
-                while (self.stack):
-                    prev.next = self.stack.pop()
-                    #if new_head_flag == 0:  # First chunk reversal
-                    #    new_head = prev.next
-                    #    new_head_flag = True
-                    prev = prev.next
-
-            prev.next = curr
-
-
-        remaining_nodes = list_len - (k* num_chunks)
-        if ( remaining_nodes > 0):
-            #attach remaining nodes
-            prev.next = curr
-    
         return new_head 
 
 
@@ -127,5 +137,5 @@ headnode.next = n2
 
 headnode.print_n(headnode)
 #headnode.swapnodes(headnode)
-new_head = headnode.chunk_revesal(headnode,2)
+new_head = headnode.chunk_revesal(headnode,0)
 headnode.print_n(new_head.next)
