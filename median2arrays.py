@@ -45,9 +45,8 @@ for i in range (m):
     print ("DEBUG: i and j",i,j)
 
     if (list1 [i-1] <= list2[j]):
-
-        
-
+        pass
+    
     elif ( list2[j-1] <= list1[i] ):
         #Return max(list1) as median
         #print("Found Median")

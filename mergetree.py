@@ -55,6 +55,15 @@ def createBalTree( sort_list ):
     bst.right = createBalTree(sort_list[m+1:])
     return bst
 
+def findheight (merge):
+    
+    if merge is None:
+        return 0
+    
+    ltht = findheight(merge.left)
+    rtht = findheight(merge.right)
+    return 1+max(ltht, rtht)
+
 Tree1 = TreeNode(2)
 Tree1.left = TreeNode(3)
 Tree1.right = TreeNode(4)
